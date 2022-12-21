@@ -1,0 +1,39 @@
+{%  extends   'capygenda/base.html' %}
+ 
+{% load static %}
+
+
+{% block css_welcome %} <link rel="stylesheet" href="{% static 'capygenda/CSS/base.css' %}">{%  endblock  %}
+
+
+{% block body %}
+<div class="flexbox">
+<div class="H1welcome">
+<h1 >
+    <span style="--i:2">W</span>
+    <span style="--i:3">E</span>
+    <span style="--i:4">L</span>
+    <span style="--i:5">C</span>
+    <span style="--i:6">O</span>
+    <span style="--i:7">M</span>
+    <span style="--i:8">E</span>
+</h1>
+</div>
+
+<div class="drawing"><img src="{% static "capygenda/images/200.gif" %}" alt="home" /></div>
+<div class="registration">
+<p><a href="register/" >Sign up </a> &nbsp;      | &nbsp;     <a href="login/" >Login </a></p> 
+</div>
+
+
+
+
+</div>
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    
+    <button type="submit" >Submit</button>
+    
+</form>
+{%  endblock  %}

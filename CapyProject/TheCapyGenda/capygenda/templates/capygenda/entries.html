@@ -1,0 +1,118 @@
+{%  extends   'capygenda/base.html' %}
+{% load sass_tags %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css_welcome %} <link rel="stylesheet" href="{% sass_src 'capygenda/CSS/entries.scss' %}">
+<link href="{% sass_src 'capygenda/CSS/checkbox.scss' %}" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+  function save() {   
+var checkbox = document.getElementById("checkbox1");
+localStorage.setItem("checkbox1", checkbox.checked);    
+}
+
+//for loading
+let checked;
+try {
+checked = JSON.parse(localStorage.getItem("checkbox1"));
+} catch(e) {
+checked = false; // default value on error
+if (typeof e === 'object' && e.message) {
+console.error(e.message)
+}
+}
+document.getElementById("checkbox1").checked = checked;</script>
+{%  endblock  %}
+{%    if user.is_authenticated        %}
+{% block body %}
+
+<p>Hello, {{user.username}} !</p>
+
+<section class="layout">
+  <div class="grow1"><form method="post" class="col-md-6 col-md-offset-3">
+    {% csrf_token %}
+    <div class="input-group">
+      <input type="text" class="form-control" name="city" placeholder="Search">
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="submit" name="temp">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </div>
+      <form>
+  </center>
+  <div class="row">
+    
+  {% if temp and humidity %}
+   
+  {{ city }}<br>
+  
+  {{ description }}
+  
+  
+      <h5>temp : {{temp}}</h5>
+      Feels like : {{ feelsLike }}
+      <h5>humidity : {{humidity}}</h5>
+  
+  {% endif %}</div>
+  <div class="grow1"> <form method="POST", class="Entry">
+    {% csrf_token %}
+    <p>{{ formtoDo|crispy}} <button type="submit" name="todosub" >Add</button></p>
+    
+ 
+</form>
+
+
+    {% csrf_token %}
+ 
+{% for toto in MyToDo     %}
+
+<form method="POST">
+  {% csrf_token %}
+      <ul class="list">
+        <li class="list-item">
+          
+        
+            <span class="check--label-text">{{ toto }}</span>
+          </label>
+          <button class="button-24" role="button"><a href="{% url 'delete_todo' toto.pk   %}" class="delete">Delete</a></button>
+      </ul>
+    </form>    
+
+
+
+{% endfor %}</div>
+  <div class="grow1"><form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    
+    <button type="submit" name="submitit" >Submit</button>
+    
+</form>
+<!-- Button trigger modal -->
+
+
+<p> 
+Check out your <a href = "/MyEntries/">Entries</a>
+</p></div>
+</section>
+
+
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+
+<input type="checkbox" id="checkbox1">checkbox</input>
+<button type="button" onClick="save()">save</button>
+
+
+{%  endblock  %}
+
+{%  else   %}
+<p>LOG IN FUCKER</p>
+
+ {% endif %}

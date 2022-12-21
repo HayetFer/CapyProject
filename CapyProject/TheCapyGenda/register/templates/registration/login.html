@@ -1,0 +1,44 @@
+{%  extends   'capygenda/base.html' %}
+
+{% load static %}
+{% block css_welcome %} <link rel="stylesheet" href="{% static 'register/css/login.css' %}">{%  endblock  %}
+
+{% block body %}
+<div class="logister">
+    
+<form method="POST" class="form-group">
+    
+    <h1><span style="--i:1">W</span>
+        <span style="--i:2">E</span>
+        <span style="--i:3">L</span>
+        <span style="--i:4">C</span>
+        <span style="--i:5">O</span>
+        <span style="--i:6">M</span>
+        <span style="--i:7">E</span>
+        <span style="--i:7">&nbsp</span>
+        <span style="--i:8">B</span>
+        <span style="--i:9">A</span>
+        <span style="--i:10">C</span>
+        <span style="--i:11">K</span>
+        <span style="--i:12">!</span>
+       </h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    {% csrf_token %}
+    {{ form }}<br><br><br>
+    <button type="submit" class="btn btn-succes"> Log-In! </button>
+    <p>Don't have an account ? Create one <a href="/register" >Here</a></p>
+    <div class="capy">
+    <img src="{% static "register/images/200.gif" %}">
+    </div>
+    </form>
+</div>
+{%  endblock  %}
